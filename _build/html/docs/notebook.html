@@ -431,7 +431,7 @@ Check <a class="reference external" href="https://jupyterbook.org/en/stable/cont
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_95050</span><span class="o">/</span><span class="mf">1082447945.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_98474</span><span class="o">/</span><span class="mf">1082447945.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
 <span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -619,7 +619,7 @@ For more information, check <a class="reference external" href="https://jupyterb
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7eff62041210&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f32a5d94050&gt;
 </pre></div>
 </div>
 <img alt="../_images/618aa24e9490a6d9a8bae707f58c76d1f286d29801271919fa39386d9e348cc5.png" src="../_images/618aa24e9490a6d9a8bae707f58c76d1f286d29801271919fa39386d9e348cc5.png" />
@@ -661,6 +661,120 @@ For more information, check <a class="reference external" href="https://jupyterb
 </div>
 </div>
 <div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;GDP-data.csv&#39;</span>
+<span class="n">GDPdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;owid-covid-data.csv&#39;</span>
+<span class="n">CovidData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+
+
+<span class="n">GDPdata</span> <span class="o">=</span> <span class="n">GDPdata</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Country Code&#39;</span><span class="p">:</span> <span class="s1">&#39;iso_code&#39;</span><span class="p">})</span>
+
+
+<span class="n">CovidData</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">CovidData</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">CovidData</span> <span class="o">=</span> <span class="n">CovidData</span><span class="p">[</span><span class="n">CovidData</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2020-12-31&#39;</span><span class="p">]</span>
+
+<span class="c1"># Join de dataframes op de Date kolom</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">GDPdata</span><span class="p">,</span> <span class="n">CovidData</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;iso_code&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="c1"># Toon de eerste paar regels van de samengevoegde dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">choropleth</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> 
+    <span class="n">locations</span><span class="o">=</span><span class="s2">&quot;iso_code&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;total_cases_per_million&quot;</span><span class="p">,</span>
+    <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Country Name&quot;</span><span class="p">,</span>
+    <span class="n">color_continuous_scale</span><span class="o">=</span><span class="n">px</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">sequential</span><span class="o">.</span><span class="n">Plasma</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Cases per million by Country&quot;</span>
+<span class="p">)</span>
+
+<span class="n">fig1</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">geo</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">showframe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">showcoastlines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">projection_type</span><span class="o">=</span><span class="s1">&#39;equirectangular&#39;</span>
+    <span class="p">),</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span>
+<span class="p">)</span>
+
+<span class="n">fig1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">choropleth</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> 
+    <span class="n">locations</span><span class="o">=</span><span class="s2">&quot;iso_code&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;total_deaths_per_million&quot;</span><span class="p">,</span>
+    <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Country Name&quot;</span><span class="p">,</span>
+    <span class="n">color_continuous_scale</span><span class="o">=</span><span class="n">px</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">sequential</span><span class="o">.</span><span class="n">Plasma</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Deaths per million by Country&quot;</span>
+<span class="p">)</span>
+
+<span class="n">fig2</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">geo</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">showframe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">showcoastlines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">projection_type</span><span class="o">=</span><span class="s1">&#39;equirectangular&#39;</span>
+    <span class="p">),</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span>
+<span class="p">)</span>
+
+<span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Country Name iso_code                                 Indicator Name  \
+0        Aruba      ABW  GDP per capita, PPP (current international $)   
+1  Afghanistan      AFG  GDP per capita, PPP (current international $)   
+2       Angola      AGO  GDP per capita, PPP (current international $)   
+3      Albania      ALB  GDP per capita, PPP (current international $)   
+4      Andorra      AND  GDP per capita, PPP (current international $)   
+
+      Indicator Code  1960  1961  1962  1963  1964  1965  ...  male_smokers  \
+0  NY.GDP.PCAP.PP.CD   NaN   NaN   NaN   NaN   NaN   NaN  ...           NaN   
+1  NY.GDP.PCAP.PP.CD   NaN   NaN   NaN   NaN   NaN   NaN  ...           NaN   
+2  NY.GDP.PCAP.PP.CD   NaN   NaN   NaN   NaN   NaN   NaN  ...           NaN   
+3  NY.GDP.PCAP.PP.CD   NaN   NaN   NaN   NaN   NaN   NaN  ...          51.2   
+4  NY.GDP.PCAP.PP.CD   NaN   NaN   NaN   NaN   NaN   NaN  ...          37.8   
+
+   handwashing_facilities  hospital_beds_per_thousand  life_expectancy  \
+0                     NaN                         NaN            76.29   
+1                  37.746                        0.50            64.83   
+2                  26.664                         NaN            61.15   
+3                     NaN                        2.89            78.57   
+4                     NaN                         NaN            83.73   
+
+   human_development_index  population  excess_mortality_cumulative_absolute  \
+0                      NaN    106459.0                             60.800007   
+1                    0.511  41128772.0                                   NaN   
+2                    0.581  35588996.0                                   NaN   
+3                    0.795   2842318.0                           5812.400000   
+4                    0.868     79843.0                             89.600000   
+
+   excess_mortality_cumulative  excess_mortality  \
+0                         8.91             -6.10   
+1                          NaN               NaN   
+2                          NaN               NaN   
+3                        26.67             54.60   
+4                        27.20             31.41   
+
+   excess_mortality_cumulative_per_million  
+0                                570.37256  
+1                                      NaN  
+2                                      NaN  
+3                               2027.45170  
+4                               1152.81190  
+
+[5 rows x 135 columns]
+</pre></div>
+</div>
 </div>
 </div>
 </section>
