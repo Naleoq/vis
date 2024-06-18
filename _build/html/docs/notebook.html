@@ -431,7 +431,7 @@ Check <a class="reference external" href="https://jupyterbook.org/en/stable/cont
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_98474</span><span class="o">/</span><span class="mf">1082447945.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_99550</span><span class="o">/</span><span class="mf">1082447945.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
 <span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -773,6 +773,56 @@ For more information, check <a class="reference external" href="https://jupyterb
 4                               1152.81190  
 
 [5 rows x 135 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">GDPdata</span> <span class="o">=</span> <span class="n">GDPdata</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Country Code&#39;</span><span class="p">:</span> <span class="s1">&#39;iso_code&#39;</span><span class="p">})</span>
+
+
+<span class="n">CovidData</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">CovidData</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">CovidData</span> <span class="o">=</span> <span class="n">CovidData</span><span class="p">[</span><span class="n">CovidData</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;2020-12-31&#39;</span><span class="p">]</span>
+
+<span class="c1"># Join de dataframes op de Date kolom</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">GDPdata</span><span class="p">,</span> <span class="n">CovidData</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;iso_code&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_cases_per_million&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_deaths_per_million&quot;</span><span class="p">,</span>
+    <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Country Name&quot;</span><span class="p">,</span>
+    <span class="n">trendline</span><span class="o">=</span><span class="s2">&quot;ols&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Comparison of Total Cases and Deaths per Million by Country&quot;</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;total_cases_per_million&quot;</span><span class="p">:</span> <span class="s2">&quot;Total Cases per Million&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;total_deaths_per_million&quot;</span><span class="p">:</span> <span class="s2">&quot;Total Deaths per Million&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">correlation</span><span class="p">)</span>
+
+<span class="c1"># Update layout for better appearance</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;top center&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7246975031268591
 </pre></div>
 </div>
 </div>
