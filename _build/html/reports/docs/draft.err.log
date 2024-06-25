@@ -17,19 +17,74 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Import packages
-import pandas as pd
 import plotly.express as px
+import pandas as pd
 import seaborn as sns
+
+file_path = 'GDP-data.csv'
+GDPdata = pd.read_csv(file_path, skiprows=4)
+file_path = 'owid-covid-data.csv'
+CovidData = pd.read_csv(file_path)
+
+GDPdata = GDPdata.rename(columns={'Country Code': 'iso_code'})
+
+
+CovidData['date'] = pd.to_datetime(CovidData['date'])
+CovidData = CovidData[CovidData['date'] == '2020-12-31']
+
+# Join de dataframes op de Date kolom
+df = pd.merge(GDPdata, CovidData, on='iso_code', how='inner')
+
+fig1 = px.choropleth(
+    df, 
+    locations="iso_code",
+    color="total_cases_per_million",
+    hover_name="Country Name",
+    color_continuous_scale=px.colors.sequential.Plasma,
+    title="Cases per million by Country"
+)
+
+fig1.update_layout(
+    geo=dict(
+        showframe=False,
+        showcoastlines=False,
+        projection_type='equirectangular'
+    ),
+    height=600
+)
+
+fig1.show()
+
+fig2 = px.choropleth(
+    df, 
+    locations="iso_code",
+    color="total_deaths_per_million",
+    hover_name="Country Name",
+    color_continuous_scale=px.colors.sequential.Plasma,
+    title="Deaths per million by Country"
+)
+
+fig2.update_layout(
+    geo=dict(
+        showframe=False,
+        showcoastlines=False,
+        projection_type='equirectangular'
+    ),
+    height=600
+)
+
+fig2.show()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_68893/1082447945.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_68857/548369967.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0mexpress[0m [0;32mas[0m [0mpx[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0mexpress[0m [0;32mas[0m [0mpx[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 4[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0;34m[0m[0m
-[0m
+[0;32m----> 3[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0mfile_path[0m [0;34m=[0m [0;34m'GDP-data.csv'[0m[0;34m[0m[0;34m[0m[0m
+
 [0;31mModuleNotFoundError[0m: No module named 'seaborn'
 ModuleNotFoundError: No module named 'seaborn'
 

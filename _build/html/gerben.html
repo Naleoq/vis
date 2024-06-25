@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -229,7 +229,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Naleoq/vis/blob/main/docs/gerben.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Naleoq/vis/blob/main/_build/html/docs/gerben.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -483,31 +483,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/homebrew/lib/python3.12/site-packages/dash/dash.py:556: UserWarning:
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_68927</span><span class="o">/</span><span class="mf">3469966857.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">dash</span> <span class="kn">import</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">jupyter_dash</span> <span class="kn">import</span> <span class="n">JupyterDash</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
 
-JupyterDash is deprecated, use Dash instead.
-See https://dash.plotly.com/dash-in-jupyter for more details.
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;dash&#39;
 </pre></div>
 </div>
-<div class="output text_html">
-        <iframe
-            width="100%"
-            height="650"
-            src="http://127.0.0.1:8050/"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div><div class="output text_html">
-        <iframe
-            width="100%"
-            height="650"
-            src="http://127.0.0.1:8050/"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

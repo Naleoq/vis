@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -229,7 +229,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Naleoq/vis/blob/main/docs/MORTALITYVSVACCINS.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Naleoq/vis/blob/main/_build/html/docs/MORTALITYVSVACCINS.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -450,7 +450,6 @@ document.write(`
 <span class="c1"># Set x-axis range from 0 to around 330</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">340</span><span class="p">]))</span>
 
-
 <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
     <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">)</span>
 <span class="p">)</span>
@@ -464,6 +463,46 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_68804</span><span class="o">/</span><span class="mf">512852263.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> 
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="c1"># Plotting with Plotly</span>
+<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_last_2021</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;total_vaccinations_per_hundred&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;excess_mortality_cumulative_per_million&#39;</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">26</span>                  <span class="n">trendline</span><span class="o">=</span><span class="s1">&#39;ols&#39;</span><span class="p">,</span> <span class="n">trendline_color_override</span><span class="o">=</span><span class="s1">&#39;darkblue&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>                  <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Excess mortality per million inhabitants vs. Total vaccinations per hundred inhabitants, per country for 2021&#39;</span><span class="p">,</span>
+
+<span class="nn">~/.local/lib/python3.10/site-packages/plotly/express/_chart_types.py</span> in <span class="ni">scatter</span><span class="nt">(data_frame, x, y, color, symbol, size, hover_name, hover_data, custom_data, text, facet_row, facet_col, facet_col_wrap, facet_row_spacing, facet_col_spacing, error_x, error_x_minus, error_y, error_y_minus, animation_frame, animation_group, category_orders, labels, orientation, color_discrete_sequence, color_discrete_map, color_continuous_scale, range_color, color_continuous_midpoint, symbol_sequence, symbol_map, opacity, size_max, marginal_x, marginal_y, trendline, trendline_options, trendline_color_override, trendline_scope, log_x, log_y, range_x, range_y, render_mode, title, template, width, height)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="n">mark</span> <span class="ow">in</span> <span class="mi">2</span><span class="n">D</span> <span class="n">space</span><span class="o">.</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">66</span><span class="s2">     return make_figure(args=locals(), constructor=go.Scatter)</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="s2"> </span>
+
+<span class="nn">~/.local/lib/python3.10/site-packages/plotly/express/_core.py</span> in <span class="ni">make_figure</span><span class="nt">(args, constructor, trace_patch, layout_patch)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2265</span><span class="s2">                     group[var] = 100.0 * group[var] / group_sum</span>
+<span class="g g-Whitespace">   </span><span class="mi">2266</span><span class="s2"> </span>
+<span class="ne">-&gt; </span><span class="mi">2267</span><span class="s2">             patch, fit_results = make_trace_kwargs(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2268</span><span class="s2">                 args, trace_spec, group, mapping_labels.copy(), sizeref</span>
+<span class="g g-Whitespace">   </span><span class="mi">2269</span><span class="s2">             )</span>
+
+<span class="nn">~/.local/lib/python3.10/site-packages/plotly/express/_core.py</span> in <span class="ni">make_trace_kwargs</span><span class="nt">(args, trace_spec, trace_data, mapping_labels, sizeref)</span>
+<span class="g g-Whitespace">    </span><span class="mi">359</span><span class="s2">                     trace_patch[&quot;x&quot;] = sorted_trace_data[args[&quot;x&quot;]][non_missing]</span>
+<span class="g g-Whitespace">    </span><span class="mi">360</span><span class="s2">                     trendline_function = trendline_functions[attr_value]</span>
+<span class="ne">--&gt; </span><span class="mi">361</span><span class="s2">                     y_out, hover_header, fit_results = trendline_function(</span>
+<span class="g g-Whitespace">    </span><span class="mi">362</span><span class="s2">                         args[&quot;trendline_options&quot;],</span>
+<span class="g g-Whitespace">    </span><span class="mi">363</span><span class="s2">                         sorted_trace_data[args[&quot;x&quot;]],</span>
+
+<span class="nn">~/.local/lib/python3.10/site-packages/plotly/express/trendline_functions/__init__.py</span> in <span class="ni">ols</span><span class="nt">(trendline_options, x_raw, x, y, x_label, y_label, non_missing)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span><span class="s2">             )</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span><span class="s2"> </span>
+<span class="ne">---&gt; </span><span class="mi">43</span><span class="s2">     import statsmodels.api as sm</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span><span class="s2">     add_constant = trendline_options.get(&quot;add_constant&quot;, True)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;statsmodels&#39;
+</pre></div>
+</div>
 </div>
 </div>
 
