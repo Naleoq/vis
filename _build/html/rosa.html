@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -419,12 +419,13 @@ document.write(`
 <span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
 
 <span class="n">covid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/owid-covid-data.csv&#39;</span><span class="p">)</span>
 <span class="n">gdp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/GDP-data.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_df</span><span class="p">[</span><span class="n">covid_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2021&#39;</span><span class="p">)]</span>
-<span class="n">covid_deaths_2021</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="s1">&#39;total_deaths&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">covid_deaths_2021</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
 
 <span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Country Name&quot;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">})</span>
@@ -438,7 +439,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s1">&#39;2021&#39;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_deaths&#39;</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> 
     <span class="n">data</span><span class="o">=</span><span class="n">merged_df</span><span class="p">,</span> 
     <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.7</span><span class="p">}</span>
 <span class="p">)</span>
@@ -454,7 +455,7 @@ document.write(`
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;2021&#39;</span><span class="p">],</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;total_deaths&#39;</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">],</span>
     <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
     <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
         <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -479,17 +480,20 @@ document.write(`
 
 <span class="c1"># Show the plot</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">x_value</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">y_value</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="s1">&#39;excess_mortality_cumulative_per_million&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Creating the figure</span>
 <span class="n">fig2</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">covid_2020_df</span><span class="p">[</span><span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">],</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">covid_2020_df</span><span class="p">[</span><span class="s1">&#39;excess_mortality_cumulative_per_million&#39;</span><span class="p">],</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x_value</span><span class="p">[</span><span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y_value</span><span class="p">[</span><span class="s1">&#39;excess_mortality_cumulative_per_million&#39;</span><span class="p">],</span>
     <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
     <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
         <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>  <span class="c1"># You can set a color if needed</span>
         <span class="n">opacity</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-        
     <span class="p">),</span>
-    <span class="n">text</span><span class="o">=</span><span class="n">covid_2020_df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span>
+    <span class="n">text</span><span class="o">=</span><span class="n">covid_2021_df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Assuming &#39;location&#39; is the country name</span>
 <span class="p">))</span>
 
 <span class="c1"># Customize layout</span>
@@ -506,11 +510,45 @@ document.write(`
 
 <span class="c1"># Show the plot</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">income_categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;High income&#39;</span><span class="p">,</span> <span class="s1">&#39;Upper middle income&#39;</span><span class="p">,</span> <span class="s1">&#39;Lower middle income&#39;</span><span class="p">,</span> <span class="s1">&#39;Low income&#39;</span><span class="p">]</span>
+
+<span class="n">filtered_df</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="p">[</span><span class="n">covid_2021_df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">income_categories</span><span class="p">)]</span>
+
+<span class="n">aggregated_df</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">aggregated_df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">aggregated_df</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Total Cases per Million by Income Category&#39;</span><span class="p">,</span>
+    <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Income Category&#39;</span><span class="p">),</span>
+    <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Total Cases per Million&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">trace</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span>
+    <span class="n">merged_df</span><span class="p">,</span> 
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;2021&#39;</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Customized Interactive Box Plot&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>  <span class="c1"># Different colors for each category</span>
+    <span class="n">points</span><span class="o">=</span><span class="s2">&quot;all&quot;</span>  <span class="c1"># Show all points</span>
+<span class="p">)</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Your Category&#39;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Your Value&#39;</span>
+<span class="p">)</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cc07b1b3e6c0b5f4af1e02cdd67505252b9705a85587a91363d613d9b0d14d48.png" src="_images/cc07b1b3e6c0b5f4af1e02cdd67505252b9705a85587a91363d613d9b0d14d48.png" />
+<img alt="_images/66ecbfd69a4d17f955a40facd84d7b33bf6d428fd64db6b8a9a9b942e077b27b.png" src="_images/66ecbfd69a4d17f955a40facd84d7b33bf6d428fd64db6b8a9a9b942e077b27b.png" />
 </div>
 </div>
 
