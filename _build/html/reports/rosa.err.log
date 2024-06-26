@@ -138,7 +138,6 @@ fig3 = px.box(
     x='2021', 
     y='total_deaths_per_million', 
     title='Customized Interactive Box Plot',
-    color='Category',  # Different colors for each category
     points="all"  # Show all points
 )
 fig3.update_layout(
@@ -146,11 +145,18 @@ fig3.update_layout(
     yaxis_title='Your Value'
 )
 fig3.show()
+
+# Step 2: Select the variables you want to compare
+variables_to_compare = ['total_deaths_per_million', '2021', 'total_cases_per_million', 'people_vaccinated_per_hundred', 'total_tests_per_million']
+
+
+fig4 = px.parallel_coordinates(merged_df, dimensions=variables_to_compare)
+fig4.show()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_68985/3287968117.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_84316/163552953.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0mgraph_objs[0m [0;32mas[0m [0mgo[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 3[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0;34m[0m[0m

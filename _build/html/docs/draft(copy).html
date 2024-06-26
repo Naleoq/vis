@@ -59,11 +59,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/draft';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/draft(copy)';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Example Notebook" href="notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +125,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -173,9 +174,9 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebook.html">Example Notebook</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="draft.html">Introduction</a></li>
 </ul>
 
     </div>
@@ -230,7 +231,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/Naleoq/vis/blob/main/_build/html/docs/docs/draft.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/Naleoq/vis/blob/main/_build/html/docs/docs/draft(copy).ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -278,7 +279,7 @@
       
       
       
-      <li><a href="https://github.com/Naleoq/vis/issues/new?title=Issue%20on%20page%20%2Fdocs/draft.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Naleoq/vis/issues/new?title=Issue%20on%20page%20%2Fdocs/draft(copy).html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +309,7 @@
       
       
       
-      <li><a href="../_sources/docs/draft.ipynb" target="_blank"
+      <li><a href="../_sources/docs/draft(copy).ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -558,7 +559,7 @@ The idea of the dataset is to give a reliable overview of the economic power of 
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_84191</span><span class="o">/</span><span class="mf">548369967.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_84240</span><span class="o">/</span><span class="mf">548369967.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -912,7 +913,7 @@ The idea of the dataset is to give a reliable overview of the economic power of 
 <span class="n">covid_last_2021</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">last_dates_2021</span><span class="p">]</span>
 
 <span class="c1"># Group by location and take the last value for the required columns</span>
-<span class="n">covid_deaths_cases_2021</span> <span class="o">=</span> <span class="n">covid_last_2021</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s1">&#39;continent&#39;</span><span class="p">,</span> <span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;median_age&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;total_tests_per_thousand&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">covid_deaths_cases_2021</span> <span class="o">=</span> <span class="n">covid_last_2021</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s1">&#39;continent&#39;</span><span class="p">,</span> <span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;total_tests_per_thousand&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">GDPdata</span> <span class="o">=</span> <span class="n">GDPdata</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Country Name&#39;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">})</span>
 
@@ -971,23 +972,6 @@ The idea of the dataset is to give a reliable overview of the economic power of 
 <span class="p">)</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_3d</span><span class="p">(</span>
-    <span class="n">df</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;median_age&quot;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_deaths_per_million&quot;</span><span class="p">,</span>
-    <span class="n">z</span><span class="o">=</span><span class="s2">&quot;2021&quot;</span><span class="p">,</span>
-    <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;location&quot;</span><span class="p">,</span>
-    <span class="n">size_max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;continent&#39;</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Comparison of Deaths per Million median age and gdp per capita by Country&quot;</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;2021&quot;</span><span class="p">:</span> <span class="s2">&quot;Gdp per capita 2021&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;total_tests_per_thousand&quot;</span><span class="p">:</span> <span class="s2">&quot;Total tests per thousand&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;people_vaccinated_per_hundred&quot;</span><span class="p">:</span> <span class="s2">&quot;vaccinated per hundred&quot;</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-<span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;continent&#39;</span><span class="p">]</span> <span class="o">!=</span>  <span class="s1">&#39;Africa&#39;</span><span class="p">]</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
@@ -1007,7 +991,7 @@ The idea of the dataset is to give a reliable overview of the economic power of 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5311/263078960.py:11: SettingWithCopyWarning:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_76724/2866940247.py:11: SettingWithCopyWarning:
 
 
 A value is trying to be set on a copy of a slice from a DataFrame.
@@ -1044,84 +1028,6 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span class="p">)</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">trace</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
-
-<span class="n">covid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;owid-covid-data.csv&#39;</span><span class="p">)</span>
-<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;GDP-data.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_df</span><span class="p">[</span><span class="n">covid_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2021&#39;</span><span class="p">)]</span>
-
-<span class="n">exclude_locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Upper middle income&#39;</span><span class="p">,</span> <span class="s1">&#39;Lower middle income&#39;</span><span class="p">,</span> <span class="s1">&#39;High income&#39;</span><span class="p">,</span> <span class="s1">&#39;Low income&#39;</span><span class="p">,</span>
-                     <span class="s1">&#39;European Union&#39;</span><span class="p">,</span> <span class="s1">&#39;North America&#39;</span><span class="p">,</span> <span class="s1">&#39;South America&#39;</span><span class="p">,</span> <span class="s1">&#39;Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;Oceania&#39;</span><span class="p">,</span> <span class="s1">&#39;Africa&#39;</span><span class="p">]</span>
-
-<span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="p">[</span><span class="o">~</span><span class="n">covid_2021_df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">exclude_locations</span><span class="p">)]</span>
-
-<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;excess_mortality_cumulative_per_million&#39;</span><span class="p">]</span>
-
-<span class="n">last_values_dfs</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
-    <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-
-<span class="n">merged_df</span> <span class="o">=</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-
-<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-
-<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Country Name&quot;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">})</span>
-<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s2">&quot;2021&quot;</span><span class="p">]]</span>
-
-<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">gdp_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
-
-<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">final_merged_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;2021&quot;</span><span class="p">:</span> <span class="s2">&quot;GDP_2021&quot;</span><span class="p">})</span>
-
-
-<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;GDP_2021&#39;</span><span class="p">]:</span>
-    <span class="n">final_merged_df</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">final_merged_df</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">])</span>
-
-<span class="n">category_orders</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;total_deaths_per_million_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;total_cases_per_million_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;people_vaccinated_per_hundred_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;excess_mortality_cumulative_per_million_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]</span> 
-<span class="p">}</span>
-
-<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;GDP_2021&#39;</span><span class="p">]:</span>
-    <span class="n">final_merged_df</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">add_categories</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
-
-<span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;GDP 2021&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Total Deaths per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million_category&#39;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Total Cases per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million_category&#39;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;People Vaccinated per Hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;people_vaccinated_per_hundred_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;people_vaccinated_per_hundred_category&#39;</span><span class="p">]},</span>
-    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Excess Mortality per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;excess_mortality_cumulative_per_million_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;excess_mortality_cumulative_per_million_category&#39;</span><span class="p">]}</span>  <span class="c1"># Corrected label and reference to categorical column</span>
-<span class="p">]</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span>
-    <span class="n">go</span><span class="o">.</span><span class="n">Parcats</span><span class="p">(</span>
-        <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
-        <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span><span class="p">,</span> <span class="s1">&#39;colorscale&#39;</span><span class="p">:</span> <span class="s1">&#39;Viridis&#39;</span><span class="p">,</span> <span class="s1">&#39;showscale&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>  <span class="c1"># Set showscale=False to hide the color scale</span>
-        <span class="n">hoverinfo</span><span class="o">=</span><span class="s1">&#39;count+probability&#39;</span><span class="p">,</span>
-        <span class="n">arrangement</span><span class="o">=</span><span class="s1">&#39;freeform&#39;</span>
-    <span class="p">)</span>
-<span class="p">])</span>
-
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Parallel Categories Plot of COVID-19 and GDP Data&#39;</span><span class="p">,</span>
-    <span class="n">height</span><span class="o">=</span><span class="mi">600</span>
-<span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1196,7 +1102,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5311/111027177.py:13: DeprecationWarning:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_76724/111027177.py:13: DeprecationWarning:
 
 DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
 </pre></div>
@@ -1261,7 +1167,7 @@ DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprec
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5311/3012838731.py:13: DeprecationWarning:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_76724/3012838731.py:13: DeprecationWarning:
 
 DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
 </pre></div>
@@ -1301,15 +1207,6 @@ DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprec
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Example Notebook</p>
-      </div>
-    </a>
 </div>
                 </footer>
               

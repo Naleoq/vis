@@ -536,7 +536,6 @@ document.write(`
     <span class="n">x</span><span class="o">=</span><span class="s1">&#39;2021&#39;</span><span class="p">,</span> 
     <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> 
     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Customized Interactive Box Plot&#39;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>  <span class="c1"># Different colors for each category</span>
     <span class="n">points</span><span class="o">=</span><span class="s2">&quot;all&quot;</span>  <span class="c1"># Show all points</span>
 <span class="p">)</span>
 <span class="n">fig3</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
@@ -544,13 +543,20 @@ document.write(`
     <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Your Value&#39;</span>
 <span class="p">)</span>
 <span class="n">fig3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Step 2: Select the variables you want to compare</span>
+<span class="n">variables_to_compare</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;total_tests_per_million&#39;</span><span class="p">]</span>
+
+
+<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">variables_to_compare</span><span class="p">)</span>
+<span class="n">fig4</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_68985</span><span class="o">/</span><span class="mf">3287968117.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_84316</span><span class="o">/</span><span class="mf">163552953.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -560,6 +566,424 @@ document.write(`
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;seaborn&#39;
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="c1"># Load your datasets</span>
+<span class="n">covid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/owid-covid-data.csv&#39;</span><span class="p">)</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/GDP-data.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Filter COVID data for the year 2021</span>
+<span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_df</span><span class="p">[</span><span class="n">covid_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2021&#39;</span><span class="p">)]</span>
+
+<span class="c1"># List of variables to get the last value for</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]</span>
+
+<span class="c1"># Dictionary to hold the last value DataFrames</span>
+<span class="n">last_values_dfs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Group by &#39;location&#39; and get the last value for each variable</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Start with the first DataFrame</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="c1"># Merge the rest of the DataFrames</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load and preprocess GDP data</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Country Name&quot;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">})</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s2">&quot;2021&quot;</span><span class="p">]]</span>
+
+<span class="c1"># Merge with the COVID data</span>
+<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">gdp_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="n">variables_to_compare</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]</span>
+
+
+<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">final_merged_df</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">variables_to_compare</span><span class="p">)</span>
+<span class="n">fig4</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="c1"># Load your datasets</span>
+<span class="n">covid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/owid-covid-data.csv&#39;</span><span class="p">)</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/GDP-data.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Filter COVID data for the year 2021</span>
+<span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_df</span><span class="p">[</span><span class="n">covid_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2021&#39;</span><span class="p">)]</span>
+
+<span class="c1"># List of variables to get the last value for</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]</span>
+
+<span class="c1"># Dictionary to hold the last value DataFrames</span>
+<span class="n">last_values_dfs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Group by &#39;location&#39; and get the last value for each variable</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Start with the first DataFrame</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="c1"># Merge the rest of the DataFrames</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load and preprocess GDP data</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Country Name&quot;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">})</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s2">&quot;2021&quot;</span><span class="p">]]</span>
+
+<span class="c1"># Merge with the COVID data</span>
+<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">gdp_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="c1"># Assuming &#39;2021&#39; column in final_merged_df contains numerical GDP data</span>
+
+<span class="n">variables_to_compare</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plotting with Plotly Express</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">final_merged_df</span><span class="p">,</span> 
+                              <span class="n">dimensions</span><span class="o">=</span><span class="n">variables_to_compare</span><span class="p">,</span> 
+                              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> 
+                              <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;2021&#39;</span><span class="p">:</span> <span class="s1">&#39;GDP (2021)&#39;</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Country&#39;</span><span class="p">})</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Comparison of COVID-19 and GDP Metrics (2021)&#39;</span><span class="p">,</span>
+    <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgba(0,0,0,0)&#39;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">line</span> <span class="mi">40</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">variables_to_compare</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2021&#39;</span><span class="p">,</span> <span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1"># Plotting with Plotly Express</span>
+<span class="ne">---&gt; </span><span class="mi">40</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">final_merged_df</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">41</span>                               <span class="n">dimensions</span><span class="o">=</span><span class="n">variables_to_compare</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">42</span>                               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">43</span>                               <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;2021&#39;</span><span class="p">:</span> <span class="s1">&#39;GDP (2021)&#39;</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Country&#39;</span><span class="p">})</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Comparison of COVID-19 and GDP Metrics (2021)&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgba(0,0,0,0)&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/express/_chart_types.py:1418,</span> in <span class="ni">parallel_coordinates</span><span class="nt">(data_frame, dimensions, color, labels, color_continuous_scale, range_color, color_continuous_midpoint, title, template, width, height)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1400</span> <span class="k">def</span> <span class="nf">parallel_coordinates</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1401</span>     <span class="n">data_frame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1402</span>     <span class="n">dimensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1411</span>     <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1412</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1413</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1414</span><span class="sd">     In a parallel coordinates plot, each row of `data_frame` is represented</span>
+<span class="g g-Whitespace">   </span><span class="mi">1415</span><span class="sd">     by a polyline mark which traverses a set of parallel axes, one for each</span>
+<span class="g g-Whitespace">   </span><span class="mi">1416</span><span class="sd">     of the `dimensions`.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1417</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1418</span>     <span class="k">return</span> <span class="n">make_figure</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="nb">locals</span><span class="p">(),</span> <span class="n">constructor</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Parcoords</span><span class="p">)</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/express/_core.py:2270,</span> in <span class="ni">make_figure</span><span class="nt">(args, constructor, trace_patch, layout_patch)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2265</span>         <span class="n">group</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">group</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">/</span> <span class="n">group_sum</span>
+<span class="g g-Whitespace">   </span><span class="mi">2267</span> <span class="n">patch</span><span class="p">,</span> <span class="n">fit_results</span> <span class="o">=</span> <span class="n">make_trace_kwargs</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2268</span>     <span class="n">args</span><span class="p">,</span> <span class="n">trace_spec</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">mapping_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">sizeref</span>
+<span class="g g-Whitespace">   </span><span class="mi">2269</span> <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2270</span> <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2271</span> <span class="k">if</span> <span class="n">fit_results</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2272</span>     <span class="n">trendline_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mapping_labels</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/basedatatypes.py:5139,</span> in <span class="ni">BasePlotlyType.update</span><span class="nt">(self, dict1, overwrite, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5137</span>         <span class="n">BaseFigure</span><span class="o">.</span><span class="n">_perform_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5138</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">5139</span>     <span class="n">BaseFigure</span><span class="o">.</span><span class="n">_perform_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict1</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5140</span>     <span class="n">BaseFigure</span><span class="o">.</span><span class="n">_perform_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5142</span> <span class="k">return</span> <span class="bp">self</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/basedatatypes.py:3919,</span> in <span class="ni">BaseFigure._perform_update</span><span class="nt">(plotly_obj, update_obj, overwrite)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3913</span> <span class="n">validator</span> <span class="o">=</span> <span class="n">plotly_obj</span><span class="o">.</span><span class="n">_get_prop_validator</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3915</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">validator</span><span class="p">,</span> <span class="n">CompoundValidator</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3916</span> 
+<span class="g g-Whitespace">   </span><span class="mi">3917</span>     <span class="c1"># Update compound objects recursively</span>
+<span class="g g-Whitespace">   </span><span class="mi">3918</span>     <span class="c1"># plotly_obj[key].update(val)</span>
+<span class="ne">-&gt; </span><span class="mi">3919</span>     <span class="n">BaseFigure</span><span class="o">.</span><span class="n">_perform_update</span><span class="p">(</span><span class="n">plotly_obj</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3920</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">validator</span><span class="p">,</span> <span class="n">CompoundArrayValidator</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3921</span>     <span class="k">if</span> <span class="n">plotly_obj</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3922</span>         <span class="c1"># plotly_obj has an existing non-empty array for key</span>
+<span class="g g-Whitespace">   </span><span class="mi">3923</span>         <span class="c1"># In this case we merge val into the existing elements</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/basedatatypes.py:3940,</span> in <span class="ni">BaseFigure._perform_update</span><span class="nt">(plotly_obj, update_obj, overwrite)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3937</span>                 <span class="n">plotly_obj</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+<span class="g g-Whitespace">   </span><span class="mi">3938</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3939</span>             <span class="c1"># Assign non-compound value</span>
+<span class="ne">-&gt; </span><span class="mi">3940</span>             <span class="n">plotly_obj</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+<span class="g g-Whitespace">   </span><span class="mi">3942</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plotly_obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3944</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">update_obj</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3945</span>         <span class="c1"># Nothing to do</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/basedatatypes.py:4874,</span> in <span class="ni">BasePlotlyType.__setitem__</span><span class="nt">(self, prop, value)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4870</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_set_array_prop</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4872</span>     <span class="c1"># ### Handle simple property ###</span>
+<span class="g g-Whitespace">   </span><span class="mi">4873</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">4874</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_set_prop</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4875</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4876</span>     <span class="c1"># Make sure properties dict is initialized</span>
+<span class="g g-Whitespace">   </span><span class="mi">4877</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_init_props</span><span class="p">()</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/basedatatypes.py:5218,</span> in <span class="ni">BasePlotlyType._set_prop</span><span class="nt">(self, prop, val)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5216</span>         <span class="k">return</span>
+<span class="g g-Whitespace">   </span><span class="mi">5217</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">5218</span>         <span class="k">raise</span> <span class="n">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">5220</span> <span class="c1"># val is None</span>
+<span class="g g-Whitespace">   </span><span class="mi">5221</span> <span class="c1"># -----------</span>
+<span class="g g-Whitespace">   </span><span class="mi">5222</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">5223</span>     <span class="c1"># Check if we should send null update</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/plotly/basedatatypes.py:5213,</span> in <span class="ni">BasePlotlyType._set_prop</span><span class="nt">(self, prop, val)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5210</span> <span class="n">validator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_validator</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5212</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">5213</span>     <span class="n">val</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_coerce</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5214</span> <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">5215</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_skip_invalid</span><span class="p">:</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/_plotly_utils/basevalidators.py:1363,</span> in <span class="ni">ColorValidator.validate_coerce</span><span class="nt">(self, v, should_raise)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1360</span> <span class="n">invalid_els</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_invalid_els</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">validated_v</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1362</span> <span class="k">if</span> <span class="n">invalid_els</span> <span class="ow">and</span> <span class="n">should_raise</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1363</span>     <span class="bp">self</span><span class="o">.</span><span class="n">raise_invalid_elements</span><span class="p">(</span><span class="n">invalid_els</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1365</span> <span class="c1"># ### Check that elements have valid colors types ###</span>
+<span class="g g-Whitespace">   </span><span class="mi">1366</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">numbers_allowed</span><span class="p">()</span> <span class="ow">or</span> <span class="n">invalid_els</span><span class="p">:</span>
+
+<span class="nn">File ~/.local/lib/python3.10/site-packages/_plotly_utils/basevalidators.py:312,</span> in <span class="ni">BaseValidator.raise_invalid_elements</span><span class="nt">(self, invalid_els)</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="k">def</span> <span class="nf">raise_invalid_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invalid_els</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span>         <span class="k">if</span> <span class="n">invalid_els</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">312</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">313</span><span class="w">                 </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">314</span><span class="sd">     Invalid element(s) received for the &#39;{name}&#39; property of {pname}</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span><span class="sd">         Invalid elements include: {invalid}</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">317</span><span class="sd"> {valid_clr_desc}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span>                     <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">plotly_name</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span>                     <span class="n">pname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parent_name</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">320</span>                     <span class="n">invalid</span><span class="o">=</span><span class="n">invalid_els</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">321</span>                     <span class="n">valid_clr_desc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span>                 <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">323</span>             <span class="p">)</span>
+
+<span class="ne">ValueError</span>: 
+    <span class="n">Invalid</span> <span class="n">element</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">received</span> <span class="k">for</span> <span class="n">the</span> <span class="s1">&#39;color&#39;</span> <span class="nb">property</span> <span class="n">of</span> <span class="n">parcoords</span><span class="o">.</span><span class="n">line</span>
+        <span class="n">Invalid</span> <span class="n">elements</span> <span class="n">include</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Afghanistan&#39;</span><span class="p">,</span> <span class="s1">&#39;Albania&#39;</span><span class="p">,</span> <span class="s1">&#39;Algeria&#39;</span><span class="p">,</span> <span class="s1">&#39;American Samoa&#39;</span><span class="p">,</span> <span class="s1">&#39;Andorra&#39;</span><span class="p">,</span> <span class="s1">&#39;Angola&#39;</span><span class="p">,</span> <span class="s1">&#39;Antigua and Barbuda&#39;</span><span class="p">,</span> <span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Armenia&#39;</span><span class="p">,</span> <span class="s1">&#39;Aruba&#39;</span><span class="p">]</span>
+
+    <span class="n">The</span> <span class="s1">&#39;color&#39;</span> <span class="nb">property</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">color</span> <span class="ow">and</span> <span class="n">may</span> <span class="n">be</span> <span class="n">specified</span> <span class="k">as</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">A</span> <span class="nb">hex</span> <span class="n">string</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="s1">&#39;#ff0000&#39;</span><span class="p">)</span>
+      <span class="o">-</span> <span class="n">An</span> <span class="n">rgb</span><span class="o">/</span><span class="n">rgba</span> <span class="n">string</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="s1">&#39;rgb(255,0,0)&#39;</span><span class="p">)</span>
+      <span class="o">-</span> <span class="n">An</span> <span class="n">hsl</span><span class="o">/</span><span class="n">hsla</span> <span class="n">string</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="s1">&#39;hsl(0,100%,50%)&#39;</span><span class="p">)</span>
+      <span class="o">-</span> <span class="n">An</span> <span class="n">hsv</span><span class="o">/</span><span class="n">hsva</span> <span class="n">string</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="s1">&#39;hsv(0,100%,100%)&#39;</span><span class="p">)</span>
+      <span class="o">-</span> <span class="n">A</span> <span class="n">named</span> <span class="n">CSS</span> <span class="n">color</span><span class="p">:</span>
+            <span class="n">aliceblue</span><span class="p">,</span> <span class="n">antiquewhite</span><span class="p">,</span> <span class="n">aqua</span><span class="p">,</span> <span class="n">aquamarine</span><span class="p">,</span> <span class="n">azure</span><span class="p">,</span>
+            <span class="n">beige</span><span class="p">,</span> <span class="n">bisque</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">blanchedalmond</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span>
+            <span class="n">blueviolet</span><span class="p">,</span> <span class="n">brown</span><span class="p">,</span> <span class="n">burlywood</span><span class="p">,</span> <span class="n">cadetblue</span><span class="p">,</span>
+            <span class="n">chartreuse</span><span class="p">,</span> <span class="n">chocolate</span><span class="p">,</span> <span class="n">coral</span><span class="p">,</span> <span class="n">cornflowerblue</span><span class="p">,</span>
+            <span class="n">cornsilk</span><span class="p">,</span> <span class="n">crimson</span><span class="p">,</span> <span class="n">cyan</span><span class="p">,</span> <span class="n">darkblue</span><span class="p">,</span> <span class="n">darkcyan</span><span class="p">,</span>
+            <span class="n">darkgoldenrod</span><span class="p">,</span> <span class="n">darkgray</span><span class="p">,</span> <span class="n">darkgrey</span><span class="p">,</span> <span class="n">darkgreen</span><span class="p">,</span>
+            <span class="n">darkkhaki</span><span class="p">,</span> <span class="n">darkmagenta</span><span class="p">,</span> <span class="n">darkolivegreen</span><span class="p">,</span> <span class="n">darkorange</span><span class="p">,</span>
+            <span class="n">darkorchid</span><span class="p">,</span> <span class="n">darkred</span><span class="p">,</span> <span class="n">darksalmon</span><span class="p">,</span> <span class="n">darkseagreen</span><span class="p">,</span>
+            <span class="n">darkslateblue</span><span class="p">,</span> <span class="n">darkslategray</span><span class="p">,</span> <span class="n">darkslategrey</span><span class="p">,</span>
+            <span class="n">darkturquoise</span><span class="p">,</span> <span class="n">darkviolet</span><span class="p">,</span> <span class="n">deeppink</span><span class="p">,</span> <span class="n">deepskyblue</span><span class="p">,</span>
+            <span class="n">dimgray</span><span class="p">,</span> <span class="n">dimgrey</span><span class="p">,</span> <span class="n">dodgerblue</span><span class="p">,</span> <span class="n">firebrick</span><span class="p">,</span>
+            <span class="n">floralwhite</span><span class="p">,</span> <span class="n">forestgreen</span><span class="p">,</span> <span class="n">fuchsia</span><span class="p">,</span> <span class="n">gainsboro</span><span class="p">,</span>
+            <span class="n">ghostwhite</span><span class="p">,</span> <span class="n">gold</span><span class="p">,</span> <span class="n">goldenrod</span><span class="p">,</span> <span class="n">gray</span><span class="p">,</span> <span class="n">grey</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span>
+            <span class="n">greenyellow</span><span class="p">,</span> <span class="n">honeydew</span><span class="p">,</span> <span class="n">hotpink</span><span class="p">,</span> <span class="n">indianred</span><span class="p">,</span> <span class="n">indigo</span><span class="p">,</span>
+            <span class="n">ivory</span><span class="p">,</span> <span class="n">khaki</span><span class="p">,</span> <span class="n">lavender</span><span class="p">,</span> <span class="n">lavenderblush</span><span class="p">,</span> <span class="n">lawngreen</span><span class="p">,</span>
+            <span class="n">lemonchiffon</span><span class="p">,</span> <span class="n">lightblue</span><span class="p">,</span> <span class="n">lightcoral</span><span class="p">,</span> <span class="n">lightcyan</span><span class="p">,</span>
+            <span class="n">lightgoldenrodyellow</span><span class="p">,</span> <span class="n">lightgray</span><span class="p">,</span> <span class="n">lightgrey</span><span class="p">,</span>
+            <span class="n">lightgreen</span><span class="p">,</span> <span class="n">lightpink</span><span class="p">,</span> <span class="n">lightsalmon</span><span class="p">,</span> <span class="n">lightseagreen</span><span class="p">,</span>
+            <span class="n">lightskyblue</span><span class="p">,</span> <span class="n">lightslategray</span><span class="p">,</span> <span class="n">lightslategrey</span><span class="p">,</span>
+            <span class="n">lightsteelblue</span><span class="p">,</span> <span class="n">lightyellow</span><span class="p">,</span> <span class="n">lime</span><span class="p">,</span> <span class="n">limegreen</span><span class="p">,</span>
+            <span class="n">linen</span><span class="p">,</span> <span class="n">magenta</span><span class="p">,</span> <span class="n">maroon</span><span class="p">,</span> <span class="n">mediumaquamarine</span><span class="p">,</span>
+            <span class="n">mediumblue</span><span class="p">,</span> <span class="n">mediumorchid</span><span class="p">,</span> <span class="n">mediumpurple</span><span class="p">,</span>
+            <span class="n">mediumseagreen</span><span class="p">,</span> <span class="n">mediumslateblue</span><span class="p">,</span> <span class="n">mediumspringgreen</span><span class="p">,</span>
+            <span class="n">mediumturquoise</span><span class="p">,</span> <span class="n">mediumvioletred</span><span class="p">,</span> <span class="n">midnightblue</span><span class="p">,</span>
+            <span class="n">mintcream</span><span class="p">,</span> <span class="n">mistyrose</span><span class="p">,</span> <span class="n">moccasin</span><span class="p">,</span> <span class="n">navajowhite</span><span class="p">,</span> <span class="n">navy</span><span class="p">,</span>
+            <span class="n">oldlace</span><span class="p">,</span> <span class="n">olive</span><span class="p">,</span> <span class="n">olivedrab</span><span class="p">,</span> <span class="n">orange</span><span class="p">,</span> <span class="n">orangered</span><span class="p">,</span>
+            <span class="n">orchid</span><span class="p">,</span> <span class="n">palegoldenrod</span><span class="p">,</span> <span class="n">palegreen</span><span class="p">,</span> <span class="n">paleturquoise</span><span class="p">,</span>
+            <span class="n">palevioletred</span><span class="p">,</span> <span class="n">papayawhip</span><span class="p">,</span> <span class="n">peachpuff</span><span class="p">,</span> <span class="n">peru</span><span class="p">,</span> <span class="n">pink</span><span class="p">,</span>
+            <span class="n">plum</span><span class="p">,</span> <span class="n">powderblue</span><span class="p">,</span> <span class="n">purple</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">rosybrown</span><span class="p">,</span>
+            <span class="n">royalblue</span><span class="p">,</span> <span class="n">rebeccapurple</span><span class="p">,</span> <span class="n">saddlebrown</span><span class="p">,</span> <span class="n">salmon</span><span class="p">,</span>
+            <span class="n">sandybrown</span><span class="p">,</span> <span class="n">seagreen</span><span class="p">,</span> <span class="n">seashell</span><span class="p">,</span> <span class="n">sienna</span><span class="p">,</span> <span class="n">silver</span><span class="p">,</span>
+            <span class="n">skyblue</span><span class="p">,</span> <span class="n">slateblue</span><span class="p">,</span> <span class="n">slategray</span><span class="p">,</span> <span class="n">slategrey</span><span class="p">,</span> <span class="n">snow</span><span class="p">,</span>
+            <span class="n">springgreen</span><span class="p">,</span> <span class="n">steelblue</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">teal</span><span class="p">,</span> <span class="n">thistle</span><span class="p">,</span> <span class="n">tomato</span><span class="p">,</span>
+            <span class="n">turquoise</span><span class="p">,</span> <span class="n">violet</span><span class="p">,</span> <span class="n">wheat</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">whitesmoke</span><span class="p">,</span>
+            <span class="n">yellow</span><span class="p">,</span> <span class="n">yellowgreen</span>
+      <span class="o">-</span> <span class="n">A</span> <span class="n">number</span> <span class="n">that</span> <span class="n">will</span> <span class="n">be</span> <span class="n">interpreted</span> <span class="k">as</span> <span class="n">a</span> <span class="n">color</span>
+        <span class="n">according</span> <span class="n">to</span> <span class="n">parcoords</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">colorscale</span>
+      <span class="o">-</span> <span class="n">A</span> <span class="nb">list</span> <span class="ow">or</span> <span class="n">array</span> <span class="n">of</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="c1"># Load your datasets</span>
+<span class="n">covid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/owid-covid-data.csv&#39;</span><span class="p">)</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/GDP-data.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Filter COVID data for the year 2021</span>
+<span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_df</span><span class="p">[</span><span class="n">covid_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2021&#39;</span><span class="p">)]</span>
+
+<span class="c1"># List of variables to get the last value for</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]</span>
+
+<span class="c1"># Dictionary to hold the last value DataFrames</span>
+<span class="n">last_values_dfs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Group by &#39;location&#39; and get the last value for each variable</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Start with the first DataFrame</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="c1"># Merge the rest of the DataFrames</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load and preprocess GDP data</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Country Name&quot;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">})</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s2">&quot;2021&quot;</span><span class="p">]]</span>
+
+<span class="c1"># Merge with the COVID data</span>
+<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">gdp_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="c1"># Rename columns for clarity</span>
+<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">final_merged_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;2021&quot;</span><span class="p">:</span> <span class="s2">&quot;GDP_2021&quot;</span><span class="p">})</span>
+
+<span class="c1"># Define the dimensions for the parallel coordinates plot</span>
+<span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Total Deaths per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Total Cases per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;People Vaccinated per Hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;GDP 2021&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;GDP_2021&#39;</span><span class="p">]}</span>
+<span class="p">]</span>
+
+<span class="c1"># Create the parallel coordinates plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Parcoords</span><span class="p">(</span>
+    <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">],</span> <span class="n">colorscale</span><span class="o">=</span><span class="s1">&#39;Viridis&#39;</span><span class="p">),</span>
+    <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span>
+<span class="p">))</span>
+
+<span class="c1"># Update the layout of the plot</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Parallel Coordinates Plot of COVID-19 and GDP Data&#39;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">1000</span>
+<span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="n">covid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/owid-covid-data.csv&#39;</span><span class="p">)</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;docs/GDP-data.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_df</span><span class="p">[</span><span class="n">covid_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2021&#39;</span><span class="p">)]</span>
+
+<span class="n">exclude_locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="s1">&#39;Upper middle income&#39;</span><span class="p">,</span> <span class="s1">&#39;Lower middle income&#39;</span><span class="p">,</span> <span class="s1">&#39;High income&#39;</span><span class="p">,</span> <span class="s1">&#39;Low income&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;European Union&#39;</span><span class="p">,</span> <span class="s1">&#39;North America&#39;</span><span class="p">,</span> <span class="s1">&#39;South America&#39;</span><span class="p">,</span> <span class="s1">&#39;Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;Oceania&#39;</span><span class="p">,</span> <span class="s1">&#39;Africa&#39;</span><span class="p">]</span>
+
+<span class="n">covid_2021_df</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="p">[</span><span class="o">~</span><span class="n">covid_2021_df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">exclude_locations</span><span class="p">)]</span>
+
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;people_vaccinated_per_hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;excess_mortality_cumulative_per_million&#39;</span><span class="p">]</span>
+
+<span class="n">last_values_dfs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">last_values_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Country Name&quot;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">})</span>
+<span class="n">gdp_df</span> <span class="o">=</span> <span class="n">gdp_df</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s2">&quot;2021&quot;</span><span class="p">]]</span>
+
+<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">gdp_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="n">final_merged_df</span> <span class="o">=</span> <span class="n">final_merged_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;2021&quot;</span><span class="p">:</span> <span class="s2">&quot;GDP_2021&quot;</span><span class="p">})</span>
+
+
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;GDP_2021&#39;</span><span class="p">]:</span>
+    <span class="n">final_merged_df</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">final_merged_df</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">])</span>
+
+<span class="n">category_orders</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;total_deaths_per_million_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;total_cases_per_million_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;people_vaccinated_per_hundred_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;excess_mortality_cumulative_per_million_category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]</span> 
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;GDP_2021&#39;</span><span class="p">]:</span>
+    <span class="n">final_merged_df</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">add_categories</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
+
+<span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;GDP 2021&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Total Deaths per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;total_deaths_per_million_category&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Total Cases per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million_category&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;People Vaccinated per Hundred&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;people_vaccinated_per_hundred_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;people_vaccinated_per_hundred_category&#39;</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Excess Mortality per Million&#39;</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;excess_mortality_cumulative_per_million_category&#39;</span><span class="p">],</span> <span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="s1">&#39;categoryarray&#39;</span><span class="p">:</span> <span class="n">category_orders</span><span class="p">[</span><span class="s1">&#39;excess_mortality_cumulative_per_million_category&#39;</span><span class="p">]}</span>  <span class="c1"># Corrected label and reference to categorical column</span>
+<span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Parcats</span><span class="p">(</span>
+        <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+        <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">final_merged_df</span><span class="p">[</span><span class="s1">&#39;GDP_2021_category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span><span class="p">,</span> <span class="s1">&#39;colorscale&#39;</span><span class="p">:</span> <span class="s1">&#39;Viridis&#39;</span><span class="p">,</span> <span class="s1">&#39;showscale&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>  <span class="c1"># Set showscale=False to hide the color scale</span>
+        <span class="n">hoverinfo</span><span class="o">=</span><span class="s1">&#39;count+probability&#39;</span><span class="p">,</span>
+        <span class="n">arrangement</span><span class="o">=</span><span class="s1">&#39;freeform&#39;</span>
+    <span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Parallel Categories Plot of COVID-19 and GDP Data&#39;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
 </div>
 </div>
 
