@@ -1,19 +1,17 @@
 Traceback (most recent call last):
-  File "/home/matthias/.local/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/home/rosa/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/usr/lib/python3/dist-packages/nbclient/client.py", line 1093, in execute
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/usr/lib/python3/dist-packages/nbclient/util.py", line 84, in wrapped
-    return just_run(coro(*args, **kwargs))
-  File "/usr/lib/python3/dist-packages/nbclient/util.py", line 62, in just_run
-    return loop.run_until_complete(coro)
-  File "/usr/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/home/rosa/.local/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/rosa/anaconda3/envs/jupyterbook/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
-  File "/usr/lib/python3/dist-packages/nbclient/client.py", line 559, in async_execute
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/usr/lib/python3/dist-packages/nbclient/client.py", line 854, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "/usr/lib/python3/dist-packages/nbclient/client.py", line 756, in _check_raise_for_error
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -154,24 +152,58 @@ fig4 = px.parallel_coordinates(merged_df, dimensions=variables_to_compare)
 fig4.show()
 ------------------
 
+
 [0;31m---------------------------------------------------------------------------[0m
-<<<<<<< HEAD
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_93914/163552953.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0mgraph_objs[0m [0;32mas[0m [0mgo[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0;32mimport[0m [0mplotly[0m[0;34m.[0m[0mexpress[0m [0;32mas[0m [0mpx[0m[0;34m[0m[0;34m[0m[0m
-=======
 [0;31mValueError[0m                                Traceback (most recent call last)
 Cell [0;32mIn[1], line 134[0m
 [1;32m    130[0m [38;5;66;03m# Step 2: Select the variables you want to compare[39;00m
 [1;32m    131[0m variables_to_compare [38;5;241m=[39m [[38;5;124m'[39m[38;5;124mtotal_deaths_per_million[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m2021[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mtotal_cases_per_million[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mpeople_vaccinated_per_hundred[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mtotal_tests_per_million[39m[38;5;124m'[39m]
 [0;32m--> 134[0m fig4 [38;5;241m=[39m [43mpx[49m[38;5;241;43m.[39;49m[43mparallel_coordinates[49m[43m([49m[43mmerged_df[49m[43m,[49m[43m [49m[43mdimensions[49m[38;5;241;43m=[39;49m[43mvariables_to_compare[49m[43m)[49m
 [1;32m    135[0m fig4[38;5;241m.[39mshow()
->>>>>>> b5f3e41e0c980753a43753403a4b91009f6983e8
 
-[0;31mModuleNotFoundError[0m: No module named 'seaborn'
-ModuleNotFoundError: No module named 'seaborn'
+File [0;32m~/.local/lib/python3.10/site-packages/plotly/express/_chart_types.py:1418[0m, in [0;36mparallel_coordinates[0;34m(data_frame, dimensions, color, labels, color_continuous_scale, range_color, color_continuous_midpoint, title, template, width, height)[0m
+[1;32m   1400[0m [38;5;28;01mdef[39;00m [38;5;21mparallel_coordinates[39m(
+[1;32m   1401[0m     data_frame[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m   1402[0m     dimensions[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[0;32m   (...)[0m
+[1;32m   1411[0m     height[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m   1412[0m ) [38;5;241m-[39m[38;5;241m>[39m go[38;5;241m.[39mFigure:
+[1;32m   1413[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m   1414[0m [38;5;124;03m    In a parallel coordinates plot, each row of `data_frame` is represented[39;00m
+[1;32m   1415[0m [38;5;124;03m    by a polyline mark which traverses a set of parallel axes, one for each[39;00m
+[1;32m   1416[0m [38;5;124;03m    of the `dimensions`.[39;00m
+[1;32m   1417[0m [38;5;124;03m    """[39;00m
+[0;32m-> 1418[0m     [38;5;28;01mreturn[39;00m [43mmake_figure[49m[43m([49m[43margs[49m[38;5;241;43m=[39;49m[38;5;28;43mlocals[39;49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mconstructor[49m[38;5;241;43m=[39;49m[43mgo[49m[38;5;241;43m.[39;49m[43mParcoords[49m[43m)[49m
+
+File [0;32m~/.local/lib/python3.10/site-packages/plotly/express/_core.py:2090[0m, in [0;36mmake_figure[0;34m(args, constructor, trace_patch, layout_patch)[0m
+[1;32m   2087[0m layout_patch [38;5;241m=[39m layout_patch [38;5;129;01mor[39;00m {}
+[1;32m   2088[0m apply_default_cascade(args)
+[0;32m-> 2090[0m args [38;5;241m=[39m [43mbuild_dataframe[49m[43m([49m[43margs[49m[43m,[49m[43m [49m[43mconstructor[49m[43m)[49m
+[1;32m   2091[0m [38;5;28;01mif[39;00m constructor [38;5;129;01min[39;00m [go[38;5;241m.[39mTreemap, go[38;5;241m.[39mSunburst, go[38;5;241m.[39mIcicle] [38;5;129;01mand[39;00m args[[38;5;124m"[39m[38;5;124mpath[39m[38;5;124m"[39m] [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[1;32m   2092[0m     args [38;5;241m=[39m process_dataframe_hierarchy(args)
+
+File [0;32m~/.local/lib/python3.10/site-packages/plotly/express/_core.py:1492[0m, in [0;36mbuild_dataframe[0;34m(args, constructor)[0m
+[1;32m   1489[0m     args[[38;5;124m"[39m[38;5;124mcolor[39m[38;5;124m"[39m] [38;5;241m=[39m [38;5;28;01mNone[39;00m
+[1;32m   1490[0m [38;5;66;03m# now that things have been prepped, we do the systematic rewriting of `args`[39;00m
+[0;32m-> 1492[0m df_output, wide_id_vars [38;5;241m=[39m [43mprocess_args_into_dataframe[49m[43m([49m
+[1;32m   1493[0m [43m    [49m[43margs[49m[43m,[49m[43m [49m[43mwide_mode[49m[43m,[49m[43m [49m[43mvar_name[49m[43m,[49m[43m [49m[43mvalue_name[49m
+[1;32m   1494[0m [43m[49m[43m)[49m
+[1;32m   1496[0m [38;5;66;03m# now that `df_output` exists and `args` contains only references, we complete[39;00m
+[1;32m   1497[0m [38;5;66;03m# the special-case and wide-mode handling by further rewriting args and/or mutating[39;00m
+[1;32m   1498[0m [38;5;66;03m# df_output[39;00m
+[1;32m   1500[0m count_name [38;5;241m=[39m _escape_col_name(df_output, [38;5;124m"[39m[38;5;124mcount[39m[38;5;124m"[39m, [var_name, value_name])
+
+File [0;32m~/.local/lib/python3.10/site-packages/plotly/express/_core.py:1213[0m, in [0;36mprocess_args_into_dataframe[0;34m(args, wide_mode, var_name, value_name)[0m
+[1;32m   1211[0m         [38;5;28;01mif[39;00m argument [38;5;241m==[39m [38;5;124m"[39m[38;5;124mindex[39m[38;5;124m"[39m:
+[1;32m   1212[0m             err_msg [38;5;241m+[39m[38;5;241m=[39m [38;5;124m"[39m[38;5;130;01m\n[39;00m[38;5;124m To use the index, pass it in directly as `df.index`.[39m[38;5;124m"[39m
+[0;32m-> 1213[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(err_msg)
+[1;32m   1214[0m [38;5;28;01melif[39;00m length [38;5;129;01mand[39;00m [38;5;28mlen[39m(df_input[argument]) [38;5;241m!=[39m length:
+[1;32m   1215[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m   1216[0m         [38;5;124m"[39m[38;5;124mAll arguments should have the same length. [39m[38;5;124m"[39m
+[1;32m   1217[0m         [38;5;124m"[39m[38;5;124mThe length of column argument `df[[39m[38;5;132;01m%s[39;00m[38;5;124m]` is [39m[38;5;132;01m%d[39;00m[38;5;124m, whereas the [39m[38;5;124m"[39m
+[0;32m   (...)[0m
+[1;32m   1224[0m         )
+[1;32m   1225[0m     )
+
+[0;31mValueError[0m: Value of 'dimensions_2' is not the name of a column in 'data_frame'. Expected one of ['location', 'total_deaths_per_million', '2021'] but received: total_cases_per_million
 
