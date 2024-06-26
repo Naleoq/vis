@@ -508,21 +508,21 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_84281/1991951373.py:16: FutureWarning: SeriesGroupBy.fillna is deprecated and will be removed in a future version. Use obj.ffill() or obj.bfill() for forward or backward filling instead. If you want to fill with a single value, use Series.fillna instead
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_93877/1991951373.py:16: FutureWarning: SeriesGroupBy.fillna is deprecated and will be removed in a future version. Use obj.ffill() or obj.bfill() for forward or backward filling instead. If you want to fill with a single value, use Series.fillna instead
   return df.groupby(&#39;location&#39;)[col].fillna(method=&#39;ffill&#39;)
-/tmp/ipykernel_84281/1991951373.py:16: FutureWarning: Series.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+/tmp/ipykernel_93877/1991951373.py:16: FutureWarning: Series.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
   return df.groupby(&#39;location&#39;)[col].fillna(method=&#39;ffill&#39;)
-/tmp/ipykernel_84281/1991951373.py:19: SettingWithCopyWarning: 
+/tmp/ipykernel_93877/1991951373.py:19: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   df_2021[&#39;excess_mortality_cumulative_per_million&#39;] = fill_last_available(df_2021, &#39;excess_mortality_cumulative_per_million&#39;)
-/tmp/ipykernel_84281/1991951373.py:16: FutureWarning: SeriesGroupBy.fillna is deprecated and will be removed in a future version. Use obj.ffill() or obj.bfill() for forward or backward filling instead. If you want to fill with a single value, use Series.fillna instead
+/tmp/ipykernel_93877/1991951373.py:16: FutureWarning: SeriesGroupBy.fillna is deprecated and will be removed in a future version. Use obj.ffill() or obj.bfill() for forward or backward filling instead. If you want to fill with a single value, use Series.fillna instead
   return df.groupby(&#39;location&#39;)[col].fillna(method=&#39;ffill&#39;)
-/tmp/ipykernel_84281/1991951373.py:16: FutureWarning: Series.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+/tmp/ipykernel_93877/1991951373.py:16: FutureWarning: Series.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
   return df.groupby(&#39;location&#39;)[col].fillna(method=&#39;ffill&#39;)
-/tmp/ipykernel_84281/1991951373.py:20: SettingWithCopyWarning: 
+/tmp/ipykernel_93877/1991951373.py:20: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -532,7 +532,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_84281</span><span class="o">/</span><span class="mf">1991951373.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_93877</span><span class="o">/</span><span class="mf">1991951373.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">24</span> 
 <span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="c1"># Create scatter plot for excess deaths vs people fully vaccinated</span>
 <span class="ne">---&gt; </span><span class="mi">26</span> <span class="n">fig1</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_last_2021</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;people_fully_vaccinated_per_hundred&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;excess_mortality_cumulative_per_million&#39;</span><span class="p">,</span> 

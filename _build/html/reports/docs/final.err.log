@@ -22,7 +22,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # Load the CSV file
-df = pd.read_csv('docs/owid-covid-data.csv')
+df = pd.read_csv('owid-covid-data.csv')
 
 # Convert the date column to datetime
 df['date'] = pd.to_datetime(df['date'])
@@ -111,7 +111,7 @@ fig.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_93877/1991951373.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_93791/3074785756.py[0m in [0;36m<module>[0;34m[0m
 [1;32m     24[0m [0;34m[0m[0m
 [1;32m     25[0m [0;31m# Create scatter plot for excess deaths vs people fully vaccinated[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 26[0;31m fig1 = px.scatter(df_last_2021, x='people_fully_vaccinated_per_hundred', y='excess_mortality_cumulative_per_million', 
