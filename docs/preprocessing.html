@@ -376,7 +376,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -392,6 +394,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authors">Authors:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-i7">Group: I7</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -403,8 +414,17 @@ document.write(`
                   
   <section id="data-preprocessing">
 <h1>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h1>
-<p>Matthias Meijer, Nevine Zaza, Rosa Tillema en Gerben Ter Wee</p>
-<p>I7</p>
+<section id="authors">
+<h2>Authors:<a class="headerlink" href="#authors" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Matthias Meijer</p></li>
+<li><p>Nevine Zaza</p></li>
+<li><p>Rosa Tillema</p></li>
+<li><p>Gerben Ter Wee</p></li>
+</ul>
+</section>
+<section id="group-i7">
+<h2>Group: I7<a class="headerlink" href="#group-i7" title="Link to this heading">#</a></h2>
 <p>The following code is used to preprocess the datasets into files that are used for the data story.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -436,6 +456,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -483,6 +504,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authors">Authors:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-i7">Group: I7</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
