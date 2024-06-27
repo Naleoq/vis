@@ -3,4 +3,5 @@
 
 format: jb-book
 root: docs/final
+chapters: docs/preprocessing
 
