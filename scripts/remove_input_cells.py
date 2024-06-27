@@ -12,7 +12,7 @@ from os import path
 
 ROOT_DIR = path.realpath(path.join(path.dirname(__file__), '..'))
 
-DATASTORY_NB_FILEPATH = path.join(ROOT_DIR, 'notebooks', 'story.ipynb')
+DATASTORY_NB_FILEPATH = path.join(ROOT_DIR, 'docs', 'final.ipynb')
 
 if __name__ == '__main__':
     ntbk = nbf.read(DATASTORY_NB_FILEPATH, nbf.NO_CONVERT)
