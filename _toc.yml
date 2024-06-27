@@ -5,5 +5,6 @@ format: jb-book
 root: docs/final
 
 chapters:
+  - file: docs/final
   - file: docs/preprocessing
 
