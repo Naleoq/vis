@@ -419,27 +419,19 @@ document.write(`
 <span class="c1"># covid_2021_df = covid_df[covid_df[&#39;date&#39;].str.startswith(&#39;2021&#39;)]</span>
 <span class="c1"># covid_2020_df = covid_df[covid_df[&#39;date&#39;].str.startswith(&#39;2020&#39;)]</span>
 <span class="c1"># exclude_locations = [&#39;World&#39;, &#39;Upper middle income&#39;, &#39;Lower middle income&#39;, &#39;High income&#39;, &#39;Low income&#39;,</span>
-                     <span class="s1">&#39;European Union&#39;</span><span class="p">,</span> <span class="s1">&#39;North America&#39;</span><span class="p">,</span> <span class="s1">&#39;South America&#39;</span><span class="p">,</span> <span class="s1">&#39;Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;Oceania&#39;</span><span class="p">,</span> <span class="s1">&#39;Africa&#39;</span><span class="p">]</span>
+<span class="c1">#                     &#39;European Union&#39;, &#39;North America&#39;, &#39;South America&#39;, &#39;Asia&#39;, &#39;Oceania&#39;, &#39;Africa&#39;]</span>
 <span class="c1"># covid_2021_df = covid_2021_df[~covid_2021_df[&#39;location&#39;].isin(exclude_locations)]</span>
 <span class="c1"># covid_2020_df = covid_2020_df[~covid_2020_df[&#39;location&#39;].isin(exclude_locations)]</span>
 
 <span class="c1"># Step 3: Process the data for visualizations</span>
 <span class="c1"># for var in variables:</span>
-    <span class="n">last_values_2021_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid_2021_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">last_values_2020_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid_2020_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c1">#    last_values_2021_dfs[var] = covid_2021_df.groupby(&#39;location&#39;).last()[var].reset_index()</span>
+<span class="c1">#    last_values_2020_dfs[var] = covid_2020_df.groupby(&#39;location&#39;).last()[var].reset_index()</span>
 
 
 <span class="c1"># Step 4: Merge datasets</span>
 <span class="c1"># for var in variables[1:]:</span>
-    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">last_values_2021_dfs</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
-    <span class="s1">&#39;European Union&#39;</span><span class="p">,</span> <span class="s1">&#39;North America&#39;</span><span class="p">,</span> <span class="s1">&#39;South America&#39;</span><span class="p">,</span> <span class="s1">&#39;Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;Oceania&#39;</span><span class="p">,</span> <span class="s1">&#39;Africa&#39;</span><span class="p">]</span>
-    <span class="o">^</span>
-<span class="ne">IndentationError</span>: unexpected indent
+<span class="c1">#    merged_df = pd.merge(merged_df, last_values_2021_dfs[var], on=&#39;location&#39;, how=&#39;left&#39;)</span>
 </pre></div>
 </div>
 </div>
