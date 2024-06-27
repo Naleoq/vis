@@ -1,0 +1,51 @@
+Traceback (most recent call last):
+  File "/home/rosa/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/rosa/.local/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/rosa/anaconda3/envs/jupyterbook/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/rosa/.local/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Step 1: Import necessary libraries
+# import pandas as pd
+# import plotly.express as px
+# import plotly.graph_objects as go
+
+# Step 2: Load and filter the datasets
+# CovidData = pd.read_csv('owid-covid-data.csv')
+# GDPdata = pd.read_csv('GDP-data.csv', skiprows=4)
+# covid_2021_df = covid_df[covid_df['date'].str.startswith('2021')]
+# covid_2020_df = covid_df[covid_df['date'].str.startswith('2020')]
+# exclude_locations = ['World', 'Upper middle income', 'Lower middle income', 'High income', 'Low income',
+                     'European Union', 'North America', 'South America', 'Asia', 'Oceania', 'Africa']
+# covid_2021_df = covid_2021_df[~covid_2021_df['location'].isin(exclude_locations)]
+# covid_2020_df = covid_2020_df[~covid_2020_df['location'].isin(exclude_locations)]
+
+# Step 3: Process the data for visualizations
+# for var in variables:
+    last_values_2021_dfs[var] = covid_2021_df.groupby('location').last()[var].reset_index()
+    last_values_2020_dfs[var] = covid_2020_df.groupby('location').last()[var].reset_index()
+
+
+# Step 4: Merge datasets
+# for var in variables[1:]:
+    merged_df = pd.merge(merged_df, last_values_2021_dfs[var], on='location', how='left')
+
+------------------
+
+
+[0;36m  Cell [0;32mIn[1], line 12[0;36m[0m
+[0;31m    'European Union', 'North America', 'South America', 'Asia', 'Oceania', 'Africa'][0m
+[0m    ^[0m
+[0;31mIndentationError[0m[0;31m:[0m unexpected indent
+
+
